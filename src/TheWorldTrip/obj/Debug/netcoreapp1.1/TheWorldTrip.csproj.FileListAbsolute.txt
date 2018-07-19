@@ -1,0 +1,10 @@
+C:\Users\uaytas\Source\Repos\TheWorldTrip_DotNet_Core\src\TheWorldTrip\obj\Debug\netcoreapp1.1\TheWorldTrip.csproj.CoreCompileInputs.cache
+C:\Users\uaytas\Source\Repos\TheWorldTrip_DotNet_Core\src\TheWorldTrip\obj\Debug\netcoreapp1.1\TheWorldTrip.AssemblyInfoInputs.cache
+C:\Users\uaytas\Source\Repos\TheWorldTrip_DotNet_Core\src\TheWorldTrip\obj\Debug\netcoreapp1.1\TheWorldTrip.AssemblyInfo.cs
+C:\Users\uaytas\Source\Repos\TheWorldTrip_DotNet_Core\src\TheWorldTrip\bin\Debug\netcoreapp1.1\TheWorldTrip.deps.json
+C:\Users\uaytas\Source\Repos\TheWorldTrip_DotNet_Core\src\TheWorldTrip\bin\Debug\netcoreapp1.1\TheWorldTrip.runtimeconfig.json
+C:\Users\uaytas\Source\Repos\TheWorldTrip_DotNet_Core\src\TheWorldTrip\bin\Debug\netcoreapp1.1\TheWorldTrip.runtimeconfig.dev.json
+C:\Users\uaytas\Source\Repos\TheWorldTrip_DotNet_Core\src\TheWorldTrip\bin\Debug\netcoreapp1.1\TheWorldTrip.dll
+C:\Users\uaytas\Source\Repos\TheWorldTrip_DotNet_Core\src\TheWorldTrip\bin\Debug\netcoreapp1.1\TheWorldTrip.pdb
+C:\Users\uaytas\Source\Repos\TheWorldTrip_DotNet_Core\src\TheWorldTrip\obj\Debug\netcoreapp1.1\TheWorldTrip.dll
+C:\Users\uaytas\Source\Repos\TheWorldTrip_DotNet_Core\src\TheWorldTrip\obj\Debug\netcoreapp1.1\TheWorldTrip.pdb

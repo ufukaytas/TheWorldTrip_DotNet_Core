@@ -1,0 +1,8 @@
+{
+  "MailSettings": {
+    "ToAddress": "info@theworldtrip.com"
+  },
+  "ConnectionStrings": {
+    "TheWorldTripContext" :  "Server=(localdb)\\MSSQLLocalDb;Database=TheWorldTripDb;Trusted_Connection=true;MultipleActiveResultSets=true"
+  }
+}

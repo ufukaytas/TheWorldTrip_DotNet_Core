@@ -1,0 +1,32 @@
+﻿@model TheWorldTrip.ViewModels.ContactViewModel
+
+
+@{
+    ViewBag.Title = "Contact Page";
+}
+<h1>@ViewBag.Title</h1>
+
+@section scripts{
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.10/jquery.validate.unobtrusive.min.js"></script>
+}
+
+<form method="post">
+   
+    <label asp-for="Name"></label>
+    <input asp-for="Name" />
+    <span asp-validation-for="Name"></span>
+
+    <label asp-for="EMail"></label>
+    <input type="email" asp-for="EMail" />
+    <span asp-validation-for="EMail"></span>
+
+    <label asp-for="Message"></label>
+    <textarea cols="40" rows="4" asp-for="Message"></textarea>
+  
+
+    <div>
+        <input type="submit" value="Send Message" />
+    </div>
+</form>
