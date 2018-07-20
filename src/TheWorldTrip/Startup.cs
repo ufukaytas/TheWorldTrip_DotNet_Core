@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using TheWorldTrip.Models;
 using TheWorldTrip.Services;
 
@@ -11,6 +12,7 @@ namespace TheWorldTrip
     {
         IHostingEnvironment _env;
         IConfigurationRoot _config;
+
         public Startup(IHostingEnvironment env)
         {
             _env = env;
@@ -28,32 +30,51 @@ namespace TheWorldTrip
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton(_config);
+            
 
             if(_env.IsEnvironment("Development"))
             {
                 services.AddSingleton<IMailService, DebugMailService>();
+                
             }
             else
             {
-                // implament production services
+                // Implement a real Mail Service
             }
 
             services.AddMvc();
 
-            services.AddTransient<TheWorldTripContextSeedData>();
+
+
+            services.AddSingleton(_config);
 
             services.AddDbContext<TheWorldTripContext>();
+
+            services.AddScoped<IWorldTripRepository, WorldTripRepository>();
+
+            services.AddTransient<TheWorldTripContextSeedData>();
+
+            
+            services.AddLogging();
 
            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, TheWorldTripContextSeedData seeder)
+        public void Configure(
+                IApplicationBuilder app, 
+                IHostingEnvironment env, 
+                TheWorldTripContextSeedData seeder,
+                ILoggerFactory factory)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                factory.AddDebug(LogLevel.Information);
+            }
+            else
+            {
+                factory.AddDebug(LogLevel.Error);
             }
 
             //if(env.IsEnvironment("Development"))

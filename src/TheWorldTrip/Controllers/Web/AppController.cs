@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Linq;
 using TheWorldTrip.Models;
@@ -12,17 +13,34 @@ namespace TheWorldTrip.Controllers.Web
     {
         IMailService _mailService;
         IConfigurationRoot _config;
-        TheWorldTripContext _context;
-        public AppController(IMailService  mailService, IConfigurationRoot  config, TheWorldTripContext context)
+        IWorldTripRepository _worldTripRepository;
+        ILogger<AppController> _logger;
+        public AppController(
+                IWorldTripRepository worldTripRepository, 
+                IMailService  mailService, 
+                IConfigurationRoot  config, 
+                TheWorldTripContext context,
+                ILogger<AppController> logger)
         {
             _mailService = mailService;
             _config = config;
-            _context = context;
+            _worldTripRepository = worldTripRepository;
+            _logger = logger;
         }
         public IActionResult Index()
         {
-            var data = _context.Trips.ToList();
-            return View();
+            try
+            {
+                var data = _worldTripRepository.GetAllTrips();
+                return View(data);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Failed" + ex.Message);
+                return Redirect("/error");
+            }
+            
+
         }
 
         public IActionResult About()
