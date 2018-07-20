@@ -8,3 +8,4 @@ C:\Users\uaytas\Source\Repos\TheWorldTrip_DotNet_Core\src\TheWorldTrip\bin\Debug
 C:\Users\uaytas\Source\Repos\TheWorldTrip_DotNet_Core\src\TheWorldTrip\bin\Debug\netcoreapp1.1\TheWorldTrip.pdb
 C:\Users\uaytas\Source\Repos\TheWorldTrip_DotNet_Core\src\TheWorldTrip\obj\Debug\netcoreapp1.1\TheWorldTrip.dll
 C:\Users\uaytas\Source\Repos\TheWorldTrip_DotNet_Core\src\TheWorldTrip\obj\Debug\netcoreapp1.1\TheWorldTrip.pdb
+C:\Users\uaytas\Source\Repos\TheWorldTrip_DotNet_Core\src\TheWorldTrip\obj\Debug\netcoreapp1.1\TheWorldTrip.csprojAssemblyReference.cache

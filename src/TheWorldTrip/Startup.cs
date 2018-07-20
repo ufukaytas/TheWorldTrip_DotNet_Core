@@ -41,13 +41,15 @@ namespace TheWorldTrip
 
             services.AddMvc();
 
+            services.AddTransient<TheWorldTripContextSeedData>();
+
             services.AddDbContext<TheWorldTripContext>();
 
            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, TheWorldTripContextSeedData seeder)
         {
             if (env.IsDevelopment())
             {
@@ -68,6 +70,8 @@ namespace TheWorldTrip
                   defaults: new { controller = "App", action = "Index" }
                   );
             });
+
+            seeder.EnsureSeedData().Wait();
         }
     }
 }
