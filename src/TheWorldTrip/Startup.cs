@@ -3,8 +3,11 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json.Serialization;
+using TheWorld.Services;
 using TheWorldTrip.Models;
 using TheWorldTrip.Services;
+using TheWorldTrip.ViewModels;
 
 namespace TheWorldTrip
 {
@@ -42,7 +45,10 @@ namespace TheWorldTrip
                 // Implement a real Mail Service
             }
 
-            services.AddMvc();
+            services.AddMvc().AddJsonOptions(config =>
+            {
+                config.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            });
 
 
 
@@ -50,10 +56,10 @@ namespace TheWorldTrip
 
             services.AddDbContext<TheWorldTripContext>();
 
-            services.AddScoped<IWorldTripRepository, WorldTripRepository>();
+            services.AddScoped<ITripRepository, TripRepository>();
 
             services.AddTransient<TheWorldTripContextSeedData>();
-
+            services.AddTransient<GeoCoordsService>();
             
             services.AddLogging();
 
@@ -67,6 +73,15 @@ namespace TheWorldTrip
                 TheWorldTripContextSeedData seeder,
                 ILoggerFactory factory)
         {
+
+            AutoMapper.Mapper.Initialize(config => {
+                config.CreateMap<TripViewModel, Trip>().ReverseMap();
+                config.CreateMap<StopViewModel, Stop>().ReverseMap();
+            });
+
+
+
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

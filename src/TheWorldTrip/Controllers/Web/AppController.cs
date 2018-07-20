@@ -13,10 +13,10 @@ namespace TheWorldTrip.Controllers.Web
     {
         IMailService _mailService;
         IConfigurationRoot _config;
-        IWorldTripRepository _worldTripRepository;
+        ITripRepository _worldTripRepository;
         ILogger<AppController> _logger;
         public AppController(
-                IWorldTripRepository worldTripRepository, 
+                ITripRepository worldTripRepository, 
                 IMailService  mailService, 
                 IConfigurationRoot  config, 
                 TheWorldTripContext context,

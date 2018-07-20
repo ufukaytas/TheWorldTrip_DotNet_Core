@@ -8,13 +8,13 @@ using Microsoft.Extensions.Logging;
 
 namespace TheWorldTrip.Models
 {
-  public class WorldTripRepository : IWorldTripRepository
+  public class TripRepository : ITripRepository
   {
     private TheWorldTripContext _context;
-    private ILogger<WorldTripRepository> _logger;
+    private ILogger<TripRepository> _logger;
     
 
-    public WorldTripRepository(TheWorldTripContext context, ILogger<WorldTripRepository> logger)
+    public TripRepository(TheWorldTripContext context, ILogger<TripRepository> logger)
     {
       _context = context;
       _logger = logger;
