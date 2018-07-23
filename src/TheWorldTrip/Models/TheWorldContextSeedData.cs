@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,25 +7,39 @@ using System.Threading.Tasks;
 
 namespace TheWorldTrip.Models
 {
-  public class TheWorldTripContextSeedData
+    public class TheWorldTripContextSeedData
     {
-    private TheWorldTripContext _context;
+        private TheWorldTripContext _context;
+        private UserManager<User> _userManager;
 
-    public TheWorldTripContextSeedData(TheWorldTripContext context)
-    {
-      _context = context;
-    }
-
-    public async Task EnsureSeedData()
-    {
-      if (!_context.Trips.Any())
-      {
-        var usTrip = new Trip()
+        public TheWorldTripContextSeedData(TheWorldTripContext context, UserManager<User> userManager)
         {
-          DateCreated = DateTime.UtcNow,
-          Name = "US Trip",
-          UserName = "", // TODO Add UserName
-          Stops = new List<Stop>()
+            _context = context;
+            _userManager = userManager;
+        }
+
+        public async Task EnsureSeedData()
+        {
+
+            if (await _userManager.FindByEmailAsync("sam.hastings@theworld.com") == null)
+            {
+                var user = new User()
+                {
+                    UserName = "samhastings",
+                    Email = "sam.hastings@theworld.com"
+                };
+
+                await _userManager.CreateAsync(user, "P@ssw0rd!");
+            }
+
+            if (!_context.Trips.Any())
+            {
+                var usTrip = new Trip()
+                {
+                    DateCreated = DateTime.UtcNow,
+                    Name = "US Trip",
+                    UserName = "Ufuk", // TODO Add UserName
+                    Stops = new List<Stop>()
           {
             new Stop() {  Name = "Atlanta, GA", Arrival = new DateTime(2014, 6, 4), Latitude = 33.748995, Longitude = -84.387982, Order = 0 },
             new Stop() {  Name = "New York, NY", Arrival = new DateTime(2014, 6, 9), Latitude = 40.712784, Longitude = -74.005941, Order = 1 },
@@ -33,18 +48,18 @@ namespace TheWorldTrip.Models
             new Stop() {  Name = "Seattle, WA", Arrival = new DateTime(2014, 8, 13), Latitude = 47.606209, Longitude = -122.332071, Order = 4 },
             new Stop() {  Name = "Atlanta, GA", Arrival = new DateTime(2014, 8, 23), Latitude = 33.748995, Longitude = -84.387982, Order = 5 },
           }
-        };
+                };
 
-        _context.Trips.Add(usTrip);
+                _context.Trips.Add(usTrip);
 
-        _context.Stops.AddRange(usTrip.Stops);
+                _context.Stops.AddRange(usTrip.Stops);
 
-        var worldTrip = new Trip()
-        {
-          DateCreated = DateTime.UtcNow,
-          Name = "WorldTrip",
-          UserName = "", // TODO Add UserName
-          Stops = new List<Stop>()
+                var worldTrip = new Trip()
+                {
+                    DateCreated = DateTime.UtcNow,
+                    Name = "WorldTrip",
+                    UserName = "Ufuk", // TODO Add UserName
+                    Stops = new List<Stop>()
           {
             new Stop() { Order = 0, Latitude =  33.748995, Longitude =  -84.387982, Name = "Atlanta, Georgia", Arrival = DateTime.Parse("Jun 3, 2014") },
             new Stop() { Order = 1, Latitude =  48.856614, Longitude =  2.352222, Name = "Paris, France", Arrival = DateTime.Parse("Jun 4, 2014") },
@@ -103,15 +118,17 @@ namespace TheWorldTrip.Models
             new Stop() { Order = 54, Latitude =  13.727896, Longitude =  100.524123, Name = "Bangkok, Thailand", Arrival = DateTime.Parse("May 24, 2015") },
             new Stop() { Order = 55, Latitude =  33.748995, Longitude =  -84.387982, Name = "Atlanta, Georgia", Arrival = DateTime.Parse("Jun 17, 2015") },
           }
-        };
+                };
 
-        _context.Trips.Add(worldTrip);
+                _context.Trips.Add(worldTrip);
 
-        _context.Stops.AddRange(worldTrip.Stops);
+                _context.Stops.AddRange(worldTrip.Stops);
 
-        await _context.SaveChangesAsync();
+            }
 
-      }
-    } 
-  }
+            
+
+            await _context.SaveChangesAsync();
+        }
+    }
 }

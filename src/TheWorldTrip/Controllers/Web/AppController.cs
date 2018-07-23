@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System;
@@ -29,9 +30,17 @@ namespace TheWorldTrip.Controllers.Web
         }
         public IActionResult Index()
         {
+            return View();
+        }
+
+
+        [Authorize]
+        public IActionResult Trips()
+        {
             try
             {
                 var data = _worldTripRepository.GetAllTrips();
+
                 return View(data);
             }
             catch (Exception ex)
@@ -39,8 +48,6 @@ namespace TheWorldTrip.Controllers.Web
                 _logger.LogError("Failed" + ex.Message);
                 return Redirect("/error");
             }
-            
-
         }
 
         public IActionResult About()
