@@ -30,9 +30,9 @@ namespace TheWorldTrip.Controllers.Api
         {
             try
             {
-                var trip = _repository.GetTripByName(tripName);
+                var trip = _repository.GetUserTripByName(tripName, User.Identity.Name);
 
-                return Ok(AutoMapper.Mapper.Map<IEnumerable<StopViewModel>>(trip.Stops.OrderBy(q => q.Order)));
+                return Ok(Mapper.Map<IEnumerable<StopViewModel>>(trip.Stops.OrderBy(q => q.Order)));
             }
             catch (Exception ex)
             {
@@ -49,7 +49,7 @@ namespace TheWorldTrip.Controllers.Api
                 if (ModelState.IsValid)
                 {
                     var stop = Mapper.Map<Stop>(stopVM);
-
+                    
                     var result = await _coordsService.GetCoordsAsync(stop.Name);
                     if(!result.Success)
                     {
@@ -59,7 +59,7 @@ namespace TheWorldTrip.Controllers.Api
                     stop.Latitude = result.Latitude;
                     stop.Longitude = result.Longitude;
 
-                    _repository.AddStop(tripName, stop);
+                    _repository.AddStop(tripName, stop, User.Identity.Name);
 
                     if(await _repository.SaveChangesAsync())
                     {
