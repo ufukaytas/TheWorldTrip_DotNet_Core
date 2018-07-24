@@ -3,7 +3,20 @@
 @{
     ViewBag.Title = "Home Page";
 }
-<div class="row">
+
+@section scripts{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.2/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.2/angular-route.min.js"></script>
+    <script src="~/js/app-trips.js"></script>
+    <script src="~/js/simpleControllers.js"></script>
+    <script src="~/js/tripsController.js"></script>
+}
+
+<div class="row" ng-app="app-trips">
+    
+    
+    <div ng-view="tripsView"></div>
+
 
     <div class="col-md-6">
         <h1>The World</h1>
